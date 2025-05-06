@@ -52,49 +52,16 @@
       vertical-align: middle;
       margin-right: 8px;
     }
-    .game-container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 40px auto;
-      max-width: 800px;
-    }
-    .card {
-      width: 100px;
-      height: 100px;
-      margin: 10px;
-      perspective: 1000px;
-      cursor: pointer;
-    }
-    .card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-    }
-    .card.flipped .card-inner {
-      transform: rotateY(180deg);
-    }
-    .card-front, .card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .card-front {
-      background-color: #90caf9;
+    /* Hafıza Oyunu Buton Stili */
+    .game-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #003049;
       color: white;
-    }
-    .card-back {
-      background-color: #eeeeee;
-      transform: rotateY(180deg);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -104,95 +71,45 @@
     <p>Haritadan bir bölgeye tıklayarak detaylı bilgiye ulaşabilirsiniz.</p>
   </header>
 
+  <!-- Hafıza Oyunu Butonu -->
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="https://fbkrl0.github.io/Haf-za-Oyunu/" target="_blank" class="game-button">
+      Hafıza Oyunu Oyna
+    </a>
+  </div>
+
   <div id="map-container">
     <img id="map" src="turkiye-iklim-haritasi.png" alt="Türkiye Haritası" usemap="#image-map">
   </div>
 
-  <!-- Harici Hafıza Oyunu Linki -->
-  <div style="text-align: center; margin-top: 60px;">
-    <a href="https://fbkrl0.github.io/Haf-za-Oyunu/" target="_blank" style="text-decoration: none; color: #003049;">
-      <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Hafıza Oyunu İkonu" width="80" style="border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s;" />
-      <div style="font-size: 1.3em; font-weight: bold; margin-top: 10px;">Harici Hafıza Oyunu</div>
-      <div style="font-size: 0.95em; color: #555;">İklim bilginizi test edin!</div>
-    </a>
-  </div>
-
   <div id="info" class="region-info"></div>
 
-  <div class="game-container" id="game"></div>
-
   <map name="image-map">
-    <!-- Harita alanları burada devam ediyor -->
+    <!-- Akdeniz İklimi Bölgesi -->
+    <area target="_blank" alt="Akdeniz İklimi" title="Akdeniz İklimi" href="https://fbkrl0.github.io/akdeniz-iklimi/" coords="175,384,59,237" shape="rect">
+    <area target="_blank" alt="Akdeniz İklimi" title="Akdeniz İklimi" href="https://fbkrl0.github.io/akdeniz-iklimi/" coords="178,419,275,284" shape="rect">
+    <area target="_blank" alt="Akdeniz İklimi" title="Akdeniz İklimi" href="https://fbkrl0.github.io/akdeniz-iklimi/" coords="251,293,303,386" shape="rect">
+    <area target="_blank" alt="Akdeniz İklimi" title="Akdeniz İklimi" href="https://fbkrl0.github.io/akdeniz-iklimi/" coords="309,331,453,392,428,423,365,420,325,394,304,381,304,313,322,325,334,333,428,412,435,405,437,377,543,403,460,385" shape="poly">
+    <area target="_blank" alt="Akdeniz İklimi" title="Akdeniz İklimi" href="https://fbkrl0.github.io/akdeniz-iklimi/" coords="456,389,469,357,521,392,519,337,488,341,476,349,504,336,515,330,533,316,565,322,573,350,600,384,609,389,591,337,592,389,546,429,544,440" shape="poly">
+    <area target="_blank" alt="Akdeniz İklimi" title="Akdeniz İklimi" href="https://fbkrl0.github.io/akdeniz-iklimi/" coords="472,352,519,380,512,344" shape="poly">
+    <area target="_blank" alt="Akdeniz İklimi" title="Akdeniz İklimi" href="https://fbkrl0.github.io/akdeniz-iklimi/" coords="550,312,581,318,585,358" shape="poly">
+    
+    <!-- Karasal İklim Bölgesi -->
+    <area target="_blank" alt="Karasal İklim" title="Karasal İklim" href="https://fbkrl0.github.io/Karasal-iklim/" coords="185,244,434,153,660,224,422,350" shape="poly">
+    <area target="_blank" alt="Karasal İklim" title="Karasal İklim" href="https://fbkrl0.github.io/Karasal-iklim/" coords="639,166,643,293,945,277,899,132,915,113,955,190,916,114" shape="poly">
+    <area target="_blank" alt="Karasal İklim" title="Karasal İklim" href="https://fbkrl0.github.io/Karasal-iklim/" coords="965,359,869,331,629,290,955,280" shape="poly">
+    <area target="_blank" alt="Karasal İklim" title="Karasal İklim" href="https://fbkrl0.github.io/Karasal-iklim/" coords="577,274,875,340,614,377,602,354,594,321" shape="poly">
+    
+    <!-- Karadeniz İklimi Bölgesi -->
+    <area target="_blank" alt="Karadeniz İklimi" title="Karadeniz İklimi" href="https://fbkrl0.github.io/karadeniz-iklimi/" coords="200,104,312,157,651,144,583,101,535,70,494,43,361,44,313,92" shape="poly">
+    <area target="_blank" alt="Karadeniz İklimi" title="Karadeniz İklimi" href="https://fbkrl0.github.io/karadeniz-iklimi/" coords="783,138,853,86,588,95,643,160" shape="poly">
+    
+    <!-- Marmara İklimi Bölgesi -->
+    <area target="_blank" alt="Marmara İklimi" title="Marmara İklimi" href="https://fbkrl0.github.io/marmara-iklimi/" coords="18,172,51,118,93,123,133,87,223,117,140,190,42,215" shape="poly">
+    <area target="_blank" alt="Marmara İklimi" title="Marmara İklimi" href="https://fbkrl0.github.io/marmara-iklimi/" coords="105,205,171,234,230,178,289,155,223,120,189,148" shape="poly">
   </map>
 
   <script>
-    const cardsArray = ['A','B','C','D','E','F','A','B','C','D','E','F'];
-    let flippedCards = [];
-    let matchedPairs = 0;
-    const game = document.getElementById('game');
-
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    function createCard(content) {
-      const card = document.createElement('div');
-      card.classList.add('card');
-
-      const inner = document.createElement('div');
-      inner.classList.add('card-inner');
-
-      const front = document.createElement('div');
-      front.classList.add('card-front');
-      front.textContent = content;
-
-      const back = document.createElement('div');
-      back.classList.add('card-back');
-      back.textContent = '?';
-
-      inner.appendChild(front);
-      inner.appendChild(back);
-      card.appendChild(inner);
-
-      card.addEventListener('click', () => {
-        if (card.classList.contains('flipped') || flippedCards.length === 2) return;
-        card.classList.add('flipped');
-        flippedCards.push({ card, content });
-
-        if (flippedCards.length === 2) {
-          const [first, second] = flippedCards;
-          if (first.content === second.content) {
-            setTimeout(() => {
-              first.card.style.visibility = 'hidden';
-              second.card.style.visibility = 'hidden';
-              matchedPairs++;
-              if (matchedPairs === cardsArray.length / 2) {
-                alert('Tebrikler! Tüm kartları eşleştirdiniz.');
-              }
-              flippedCards = [];
-            }, 1000);
-          } else {
-            setTimeout(() => {
-              first.card.classList.remove('flipped');
-              second.card.classList.remove('flipped');
-              flippedCards = [];
-            }, 1000);
-          }
-        }
-      });
-
-      return card;
-    }
-
-    shuffle(cardsArray).forEach(content => {
-      const card = createCard(content);
-      game.appendChild(card);
-    });
-
     const map = document.getElementById('map');
     let isDragging = false, startX, startY, currentX = 0, currentY = 0, scale = 1;
 

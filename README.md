@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GEOVISION 4006 - Türkiye İklim Haritası</title>
+  <title>GEOVISION 4006 - Türkiye İklim Ve Biyom Haritası</title>
   <style>
     body {
       margin: 0;
@@ -67,14 +67,14 @@
 </head>
 <body>
   <header>
-    <h1>GEOVISION 4006 - Türkiye İklim Haritası</h1>
-    <p>Haritadan bir bölgeye tıklayarak detaylı bilgiye ulaşabilirsiniz.</p>
+    <h1>GEOVISION 4006 - Türkiye İklim Ve Biyom Haritası</h1>
+    <p>Haritadan istediğiniz bölgeye tıklayarak orasının caoğrafyasını keşfetmeye hazır olun!</p>
   </header>
 
   <!-- Hafıza Oyunu Butonu -->
   <div style="text-align: center; margin-top: 20px;">
     <a href="https://fbkrl0.github.io/Haf-za-Oyunu/" target="_blank" class="game-button">
-      Hafıza Oyunu Oyna
+      Hafıza Arenası 
     </a>
   </div>
 

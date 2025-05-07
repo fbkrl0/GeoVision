@@ -127,12 +127,12 @@
   <script>
     const ctx = document.getElementById('biochart').getContext('2d');
     const bioChart = new Chart(ctx, {
-      type: 'bar',
+      type: 'pie', // Pie chart kullanarak yüzdelik dağılımı göstereceğiz
       data: {
         labels: ['Akdeniz İklimi', 'Karasal İklim', 'Karadeniz İklimi', 'Marmara İklimi'],
         datasets: [{
-          label: 'Biyoçeşitlilik (Bitki ve Hayvan Çeşitliliği)',
-          data: [80, 60, 70, 90], // Örnek veriler
+          label: 'Biyoçeşitlilik Dağılışı',
+          data: [40, 25, 20, 15], // Örnek biyoçeşitlilik yüzdeleri
           backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A8'],
           borderColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A8'],
           borderWidth: 1
@@ -147,58 +147,12 @@
           tooltip: {
             callbacks: {
               label: function(tooltipItem) {
-                return `Biyoçeşitlilik Skoru: ${tooltipItem.raw}`;
+                return `Biyoçeşitlilik Yüzdesi: ${tooltipItem.raw}%`;
               }
             }
           }
-        },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'İklim Bölgeleri'
-            },
-            beginAtZero: true
-          },
-          y: {
-            title: {
-              display: true,
-              text: 'Biyoçeşitlilik Skoru (0-100)'
-            },
-            beginAtZero: true
-          }
         }
       }
-    });
-  </script>
-
-  <script>
-    const map = document.getElementById('map');
-    let isDragging = false, startX, startY, currentX, currentY;
-
-    map.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      startX = e.clientX - map.offsetLeft;
-      startY = e.clientY - map.offsetTop;
-      map.style.cursor = 'grabbing';
-    });
-
-    map.addEventListener('mousemove', (e) => {
-      if (isDragging) {
-        currentX = e.clientX - startX;
-        currentY = e.clientY - startY;
-        map.style.transform = `translate(${currentX}px, ${currentY}px)`;
-      }
-    });
-
-    map.addEventListener('mouseup', () => {
-      isDragging = false;
-      map.style.cursor = 'grab';
-    });
-
-    map.addEventListener('mouseleave', () => {
-      isDragging = false;
-      map.style.cursor = 'grab';
     });
   </script>
 </body>

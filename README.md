@@ -52,7 +52,6 @@
       vertical-align: middle;
       margin-right: 8px;
     }
-    /* Hafıza Oyunu Buton Stili */
     .game-button {
       padding: 10px 20px;
       font-size: 16px;
@@ -63,7 +62,6 @@
       cursor: pointer;
       text-decoration: none;
     }
-    /* Grafik Alanı Stili */
     .chart-container {
       display: flex;
       justify-content: center;
@@ -133,7 +131,7 @@
       data: {
         labels: ['Akdeniz İklimi', 'Karasal İklim', 'Karadeniz İklimi', 'Marmara İklimi'],
         datasets: [{
-          label: 'Biyoçeşitlilik',
+          label: 'Biyoçeşitlilik (Bitki ve Hayvan Çeşitliliği)',
           data: [80, 60, 70, 90], // Örnek veriler
           backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A8'],
           borderColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A8'],
@@ -149,56 +147,59 @@
           tooltip: {
             callbacks: {
               label: function(tooltipItem) {
-                return `Biyoçeşitlilik: ${tooltipItem.raw}`;
+                return `Biyoçeşitlilik Skoru: ${tooltipItem.raw}`;
               }
             }
           }
         },
         scales: {
           x: {
+            title: {
+              display: true,
+              text: 'İklim Bölgeleri'
+            },
             beginAtZero: true
           },
           y: {
+            title: {
+              display: true,
+              text: 'Biyoçeşitlilik Skoru (0-100)'
+            },
             beginAtZero: true
           }
         }
       }
     });
   </script>
-  
+
   <script>
     const map = document.getElementById('map');
-    let isDragging = false, startX, startY, currentX = 0, currentY = 0, scale = 1;
+    let isDragging = false, startX, startY, currentX, currentY;
 
     map.addEventListener('mousedown', (e) => {
       isDragging = true;
-      startX = e.clientX - currentX;
-      startY = e.clientY - currentY;
+      startX = e.clientX - map.offsetLeft;
+      startY = e.clientY - map.offsetTop;
       map.style.cursor = 'grabbing';
     });
 
-    window.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      currentX = e.clientX - startX;
-      currentY = e.clientY - startY;
-      updateTransform();
+    map.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        currentX = e.clientX - startX;
+        currentY = e.clientY - startY;
+        map.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      }
     });
 
-    window.addEventListener('mouseup', () => {
+    map.addEventListener('mouseup', () => {
       isDragging = false;
       map.style.cursor = 'grab';
     });
 
-    window.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      const delta = e.deltaY > 0 ? -0.1 : 0.1;
-      scale = Math.min(Math.max(0.5, scale + delta), 2);
-      updateTransform();
+    map.addEventListener('mouseleave', () => {
+      isDragging = false;
+      map.style.cursor = 'grab';
     });
-
-    function updateTransform() {
-      map.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
-    }
   </script>
 </body>
 </html>

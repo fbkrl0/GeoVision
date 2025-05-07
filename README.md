@@ -10,17 +10,24 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to bottom right, #e0f7fa, #f1f8e9);
       color: #333;
+      line-height: 1.6;
     }
     header {
       background-color: #003049;
       color: white;
-      padding: 20px;
+      padding: 30px 20px;
       text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      border-bottom: 3px solid #f1f8e9;
     }
     h1 {
       margin: 0;
-      font-size: 2em;
+      font-size: 2.5em;
+      font-weight: bold;
+    }
+    p {
+      margin: 10px 0 0;
+      font-size: 1.1em;
     }
     #map-container {
       display: flex;
@@ -32,8 +39,8 @@
     #map {
       transition: transform 0.3s ease;
       cursor: grab;
-      max-width: 100%;
-      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     .region-info {
       display: none;
@@ -56,38 +63,22 @@
     }
     /* Hafıza Oyunu Buton Stili */
     .game-button {
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 12px 25px;
+      font-size: 18px;
       background-color: #003049;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
       text-decoration: none;
-      margin-bottom: 20px;
-      display: inline-block;
+      transition: background-color 0.3s;
     }
-    /* Küçük Grafik Alanı */
-    #chart-container {
-      text-align: center;
-      margin-top: 30px;
-      padding: 20px;
-      background-color: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    .game-button:hover {
+      background-color: #f1f8e9;
+      color: #003049;
     }
-    #chart {
-      width: 80%;
-      height: 250px;
-      background-color: #f4f4f4;
-      margin: 0 auto;
-      border-radius: 8px;
-    }
-    .footer {
-      text-align: center;
-      margin-top: 50px;
-      font-size: 14px;
-      color: #555;
+    .game-button:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
@@ -109,14 +100,6 @@
   </div>
 
   <div id="info" class="region-info"></div>
-
-  <!-- Küçük Grafik -->
-  <div id="chart-container">
-    <div id="chart">
-      <!-- Bu alanı burada örnek grafikle doldurabiliriz, fakat burada şimdilik sadece arka planı stilize ettik -->
-      <p style="padding-top: 100px; color: #888;">Grafik Buraya Eklenebilir</p>
-    </div>
-  </div>
 
   <map name="image-map">
     <!-- Akdeniz İklimi Bölgesi -->
@@ -177,9 +160,5 @@
       map.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
     }
   </script>
-
-  <div class="footer">
-    <p>&copy; 2025 GEOVISION - Türkiye İklim ve Biyom Haritası</p>
-  </div>
 </body>
 </html>

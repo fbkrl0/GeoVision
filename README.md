@@ -132,7 +132,7 @@
         labels: ['Akdeniz İklimi', 'Karasal İklim', 'Karadeniz İklimi', 'Marmara İklimi'],
         datasets: [{
           label: 'Biyoçeşitlilik Dağılışı',
-          data: [40, 25, 20, 15], // Örnek biyoçeşitlilik yüzdeleri
+          data: [35, 20, 30, 15], // Örnek biyoçeşitlilik yüzdeleri
           backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A8'],
           borderColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A8'],
           borderWidth: 1

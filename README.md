@@ -28,6 +28,7 @@
       align-items: center;
       margin-top: 30px;
       overflow: hidden;
+      position: relative; /* This allows the SVG to overlay the map */
     }
     #map {
       transition: transform 0.3s ease;
@@ -63,6 +64,20 @@
       cursor: pointer;
       text-decoration: none;
     }
+    /* SVG Overlay */
+    #map-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* Allows interaction with the map below */
+    }
+    .graph {
+      fill: rgba(255, 0, 0, 0.5); /* Example fill color */
+      stroke: black;
+      stroke-width: 2;
+    }
   </style>
 </head>
 <body>
@@ -80,6 +95,12 @@
 
   <div id="map-container">
     <img id="map" src="turkiye-iklim-haritasi.png" alt="Türkiye Haritası" usemap="#image-map">
+    <!-- Eklenen Grafik (SVG Overlay) -->
+    <svg id="map-overlay">
+      <!-- Örnek grafik: Bir üçgen ekleniyor -->
+      <polygon class="graph" points="400,150 450,200 350,200" />
+      <!-- Diğer grafikler burada eklenebilir -->
+    </svg>
   </div>
 
   <div id="info" class="region-info"></div>

@@ -30,10 +30,10 @@
       overflow: hidden;
     }
     #map {
-      width: 80%; /* Harita genişliğini %80 olarak ayarladım */
-      max-width: 1200px; /* Maksimum genişlik */
-      height: auto; /* Yükseklik orantılı olarak ayarlanacak */
       transition: transform 0.3s ease;
+      cursor: grab;
+      max-width: 100%;
+      height: auto;
     }
     .region-info {
       display: none;
@@ -64,6 +64,30 @@
       border-radius: 5px;
       cursor: pointer;
       text-decoration: none;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    /* Küçük Grafik Alanı */
+    #chart-container {
+      text-align: center;
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    #chart {
+      width: 80%;
+      height: 250px;
+      background-color: #f4f4f4;
+      margin: 0 auto;
+      border-radius: 8px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 14px;
+      color: #555;
     }
   </style>
 </head>
@@ -85,6 +109,14 @@
   </div>
 
   <div id="info" class="region-info"></div>
+
+  <!-- Küçük Grafik -->
+  <div id="chart-container">
+    <div id="chart">
+      <!-- Bu alanı burada örnek grafikle doldurabiliriz, fakat burada şimdilik sadece arka planı stilize ettik -->
+      <p style="padding-top: 100px; color: #888;">Grafik Buraya Eklenebilir</p>
+    </div>
+  </div>
 
   <map name="image-map">
     <!-- Akdeniz İklimi Bölgesi -->
@@ -113,7 +145,7 @@
 
   <script>
     const map = document.getElementById('map');
-    let isDragging = false, startX, startY, currentX = 0, currentY = 0;
+    let isDragging = false, startX, startY, currentX = 0, currentY = 0, scale = 1;
 
     map.addEventListener('mousedown', (e) => {
       isDragging = true;
@@ -134,9 +166,20 @@
       map.style.cursor = 'grab';
     });
 
+    window.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -0.1 : 0.1;
+      scale = Math.min(Math.max(0.5, scale + delta), 2);
+      updateTransform();
+    });
+
     function updateTransform() {
-      map.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      map.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
     }
   </script>
+
+  <div class="footer">
+    <p>&copy; 2025 GEOVISION - Türkiye İklim ve Biyom Haritası</p>
+  </div>
 </body>
 </html>

@@ -30,8 +30,10 @@
       overflow: hidden;
     }
     #map {
+      width: 80%; /* Harita genişliğini %80 olarak ayarladım */
+      max-width: 1200px; /* Maksimum genişlik */
+      height: auto; /* Yükseklik orantılı olarak ayarlanacak */
       transition: transform 0.3s ease;
-      cursor: grab;
     }
     .region-info {
       display: none;
@@ -109,48 +111,9 @@
     <area target="_blank" alt="Marmara İklimi" title="Marmara İklimi" href="https://fbkrl0.github.io/marmara-iklimi/" coords="105,205,171,234,230,178,289,155,223,120,189,148" shape="poly">
   </map>
 
-  <!-- Pasta Grafiği Eklemeleri -->
-  <div style="text-align: center; margin-top: 40px;">
-    <h2>İklimlere Göre Biyoçeşitlilik Dağılışı</h2>
-    <canvas id="biodiversity-chart" width="400" height="400"></canvas>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    var ctx = document.getElementById('biodiversity-chart').getContext('2d');
-    var biodiversityChart = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: ['Akdeniz İklimi', 'Karasal İklim', 'Karadeniz İklimi', 'Marmara İklimi'],
-        datasets: [{
-          label: 'Biyoçeşitlilik Dağılışı',
-          data: [30, 25, 20, 25], // Örnek veriler (yüzdelik)
-          backgroundColor: ['#FF6347', '#FF9900', '#66CC66', '#3366CC'],
-          borderColor: ['#FF6347', '#FF9900', '#66CC66', '#3366CC'],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          tooltip: {
-            callbacks: {
-              label: function(tooltipItem) {
-                return tooltipItem.label + ': ' + tooltipItem.raw + '%';
-              }
-            }
-          }
-        }
-      }
-    });
-  </script>
-
   <script>
     const map = document.getElementById('map');
-    let isDragging = false, startX, startY, currentX = 0, currentY = 0, scale = 1;
+    let isDragging = false, startX, startY, currentX = 0, currentY = 0;
 
     map.addEventListener('mousedown', (e) => {
       isDragging = true;
@@ -171,15 +134,8 @@
       map.style.cursor = 'grab';
     });
 
-    window.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      const delta = e.deltaY > 0 ? -0.1 : 0.1;
-      scale = Math.min(Math.max(0.5, scale + delta), 2);
-      updateTransform();
-    });
-
     function updateTransform() {
-      map.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+      map.style.transform = `translate(${currentX}px, ${currentY}px)`;
     }
   </script>
 </body>

@@ -28,7 +28,6 @@
       align-items: center;
       margin-top: 30px;
       overflow: hidden;
-      position: relative; /* This allows the SVG to overlay the map */
     }
     #map {
       transition: transform 0.3s ease;
@@ -64,20 +63,6 @@
       cursor: pointer;
       text-decoration: none;
     }
-    /* SVG Overlay */
-    #map-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none; /* Allows interaction with the map below */
-    }
-    .graph {
-      fill: rgba(255, 0, 0, 0.5); /* Example fill color */
-      stroke: black;
-      stroke-width: 2;
-    }
   </style>
 </head>
 <body>
@@ -95,12 +80,6 @@
 
   <div id="map-container">
     <img id="map" src="turkiye-iklim-haritasi.png" alt="Türkiye Haritası" usemap="#image-map">
-    <!-- Eklenen Grafik (SVG Overlay) -->
-    <svg id="map-overlay">
-      <!-- Örnek grafik: Bir üçgen ekleniyor -->
-      <polygon class="graph" points="400,150 450,200 350,200" />
-      <!-- Diğer grafikler burada eklenebilir -->
-    </svg>
   </div>
 
   <div id="info" class="region-info"></div>
@@ -129,6 +108,45 @@
     <area target="_blank" alt="Marmara İklimi" title="Marmara İklimi" href="https://fbkrl0.github.io/marmara-iklimi/" coords="18,172,51,118,93,123,133,87,223,117,140,190,42,215" shape="poly">
     <area target="_blank" alt="Marmara İklimi" title="Marmara İklimi" href="https://fbkrl0.github.io/marmara-iklimi/" coords="105,205,171,234,230,178,289,155,223,120,189,148" shape="poly">
   </map>
+
+  <!-- Pasta Grafiği Eklemeleri -->
+  <div style="text-align: center; margin-top: 40px;">
+    <h2>İklimlere Göre Biyoçeşitlilik Dağılışı</h2>
+    <canvas id="biodiversity-chart" width="400" height="400"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    var ctx = document.getElementById('biodiversity-chart').getContext('2d');
+    var biodiversityChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Akdeniz İklimi', 'Karasal İklim', 'Karadeniz İklimi', 'Marmara İklimi'],
+        datasets: [{
+          label: 'Biyoçeşitlilik Dağılışı',
+          data: [30, 25, 20, 25], // Örnek veriler (yüzdelik)
+          backgroundColor: ['#FF6347', '#FF9900', '#66CC66', '#3366CC'],
+          borderColor: ['#FF6347', '#FF9900', '#66CC66', '#3366CC'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
 
   <script>
     const map = document.getElementById('map');

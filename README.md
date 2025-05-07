@@ -10,24 +10,17 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to bottom right, #e0f7fa, #f1f8e9);
       color: #333;
-      line-height: 1.6;
     }
     header {
       background-color: #003049;
       color: white;
-      padding: 30px 20px;
+      padding: 20px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      border-bottom: 3px solid #f1f8e9;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     h1 {
       margin: 0;
-      font-size: 2.5em;
-      font-weight: bold;
-    }
-    p {
-      margin: 10px 0 0;
-      font-size: 1.1em;
+      font-size: 2em;
     }
     #map-container {
       display: flex;
@@ -39,8 +32,6 @@
     #map {
       transition: transform 0.3s ease;
       cursor: grab;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     .region-info {
       display: none;
@@ -63,22 +54,24 @@
     }
     /* Hafıza Oyunu Buton Stili */
     .game-button {
-      padding: 12px 25px;
-      font-size: 18px;
+      padding: 10px 20px;
+      font-size: 16px;
       background-color: #003049;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 5px;
       cursor: pointer;
       text-decoration: none;
-      transition: background-color 0.3s;
     }
-    .game-button:hover {
-      background-color: #f1f8e9;
-      color: #003049;
+    /* Grafik Alanı Stili */
+    .chart-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
     }
-    .game-button:active {
-      transform: scale(0.98);
+    canvas {
+      max-width: 90%;
+      max-height: 500px;
     }
   </style>
 </head>
@@ -100,6 +93,11 @@
   </div>
 
   <div id="info" class="region-info"></div>
+
+  <!-- Biyom Grafiği -->
+  <div class="chart-container">
+    <canvas id="biochart"></canvas>
+  </div>
 
   <map name="image-map">
     <!-- Akdeniz İklimi Bölgesi -->
@@ -126,6 +124,48 @@
     <area target="_blank" alt="Marmara İklimi" title="Marmara İklimi" href="https://fbkrl0.github.io/marmara-iklimi/" coords="105,205,171,234,230,178,289,155,223,120,189,148" shape="poly">
   </map>
 
+  <!-- Grafik için JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('biochart').getContext('2d');
+    const bioChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Akdeniz İklimi', 'Karasal İklim', 'Karadeniz İklimi', 'Marmara İklimi'],
+        datasets: [{
+          label: 'Biyoçeşitlilik',
+          data: [80, 60, 70, 90], // Örnek veriler
+          backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A8'],
+          borderColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A8'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return `Biyoçeşitlilik: ${tooltipItem.raw}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            beginAtZero: true
+          },
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+  
   <script>
     const map = document.getElementById('map');
     let isDragging = false, startX, startY, currentX = 0, currentY = 0, scale = 1;

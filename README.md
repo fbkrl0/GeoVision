@@ -75,7 +75,7 @@
 </head>
 <body>
   <header>
-    <h1>GEOVISION 4006 - Türkiye İklim Ve Biyom Haritası</h1>
+    <h1>GeoKolik 4006 - Türkiye İklim Ve Biyom Haritası</h1>
     <p>Haritadan istediğiniz bölgeye tıklayarak orasının coğrafyasını keşfetmeye hazır olun!</p>
   </header>
 
